@@ -274,6 +274,40 @@
       opacity: 0.7;
     }
 
+    /* Jump-to-album link in hero */
+    .jump {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 38px;
+      padding: 11px 22px;
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 999px;
+      text-decoration: none;
+      letter-spacing: 0.2px;
+      transition: all 200ms ease;
+      cursor: pointer;
+    }
+    .jump:hover {
+      background: var(--paper);
+      border-color: var(--seal);
+      color: var(--seal);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(20, 16, 10, 0.08);
+    }
+    .jump__arrow {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      transition: transform 200ms ease;
+    }
+    .jump:hover .jump__arrow { transform: translateY(2px); }
+
     /* ═══════════════════════════════════════════
        CHAPTERS — sections as book chapters
        ═══════════════════════════════════════════ */
@@ -631,6 +665,154 @@
     }
 
     /* ═══════════════════════════════════════════
+       ALBUM — the mosaic of memories
+       ═══════════════════════════════════════════ */
+    .album {
+      margin: 80px 0 40px;
+      position: relative;
+    }
+    .album__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .album__label {
+      font-family: 'Rubik', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--seal);
+      margin-bottom: 14px;
+    }
+    .album__label::before, .album__label::after {
+      content: "";
+      display: inline-block;
+      width: 18px; height: 1px;
+      background: var(--seal);
+      vertical-align: middle;
+      margin: 0 10px;
+      margin-bottom: 3px;
+    }
+    h2.album__title {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 44px;
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1.1;
+      letter-spacing: -0.6px;
+      margin-bottom: 16px;
+    }
+    .album__intro {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--ink-2);
+      line-height: 1.8;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .album__grid {
+      column-count: 2;
+      column-gap: 22px;
+    }
+    @media (max-width: 680px) {
+      .album__grid { column-count: 1; }
+    }
+
+    .album__loading,
+    .album__empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 48px 20px;
+      font-family: 'Frank Ruhl Libre', serif;
+      font-style: italic;
+      color: var(--ink-3);
+      font-size: 17px;
+    }
+
+    /* Memory card — journal page */
+    .mem {
+      break-inside: avoid;
+      margin-bottom: 22px;
+      padding: 26px 26px 28px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      box-shadow: 0 1px 2px rgba(20, 16, 10, 0.04), 0 10px 30px rgba(20, 16, 10, 0.06);
+      position: relative;
+      transition: transform 260ms ease, box-shadow 260ms ease;
+      animation: revealUp 600ms ease backwards;
+    }
+    .mem::before {
+      content: "";
+      position: absolute; inset: 4px;
+      border: 1px solid var(--line-faint);
+      pointer-events: none;
+      border-radius: 1px;
+    }
+    .mem:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 4px rgba(20, 16, 10, 0.06), 0 20px 46px rgba(20, 16, 10, 0.10);
+    }
+    .mem__head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line-faint);
+      position: relative; z-index: 1;
+    }
+    .mem__name {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+      letter-spacing: -0.2px;
+    }
+    .mem__circle {
+      font-family: 'Rubik', sans-serif;
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--seal);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .mem__text {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 16.5px;
+      color: var(--ink-2);
+      line-height: 1.75;
+      white-space: pre-wrap;
+      position: relative; z-index: 1;
+    }
+    .mem__date {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-style: italic;
+      font-size: 12.5px;
+      color: var(--ink-4);
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dotted var(--line-faint);
+      letter-spacing: 0.3px;
+      position: relative; z-index: 1;
+    }
+
+    @media (max-width: 600px) {
+      .album { margin: 56px 0 30px; }
+      h2.album__title { font-size: 32px; }
+      .album__intro { font-size: 16px; }
+      .mem { padding: 22px 22px 24px; }
+      .mem__name { font-size: 17px; }
+      .mem__text { font-size: 16px; }
+    }
+
+    /* ═══════════════════════════════════════════
        FOOTER
        ═══════════════════════════════════════════ */
     footer {
@@ -758,6 +940,11 @@
           <ellipse cx="50" cy="17" rx="3" ry="1.3" transform="rotate(3 50 17)" fill="currentColor" opacity="0.5"/>
         </svg>
       </div>
+
+      <a href="#album" class="jump">
+        לעיון בזיכרונות שכבר נכתבו
+        <svg class="jump__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </a>
     </section>
 
     <!-- ═══════════ FORM ═══════════ -->
@@ -767,7 +954,7 @@
       <section class="chapter chapter--i">
         <div class="chapter__num" aria-hidden="true">I</div>
         <div class="chapter__label">פרק ראשון</div>
-        <h2 class="chapter__title">הויקטור שלי</h2>
+        <h2 class="chapter__title">הוויקטור שלי</h2>
         <p class="chapter__intro">
           אין זיכרון קטן מדי. משפט, מבט, רגע של חסד, צחוק שלא נשכח —
           הכול אוסף יחד את הפסיפס של מי שהוא היה.
@@ -893,6 +1080,22 @@
       </p>
     </section>
 
+    <!-- ═══════════ ALBUM ═══════════ -->
+    <section class="album" id="album">
+      <div class="album__header">
+        <div class="album__label">פרק שלישי</div>
+        <h2 class="album__title">הפסיפס שלנו</h2>
+        <p class="album__intro">
+          כל זיכרון שנוסף הוא אבן בפסיפס — רגע, משפט, חיוך.
+          זה ויקטור כפי שאנחנו זוכרים אותו, יחד.
+        </p>
+      </div>
+
+      <div class="album__grid" id="albumGrid">
+        <div class="album__loading">אוספים את הזיכרונות…</div>
+      </div>
+    </section>
+
     <footer>
       נעשה באהבה <span class="heart">◆</span> בידי חברים ומשפחה
     </footer>
@@ -960,6 +1163,8 @@
         form.style.display = 'none';
         thanks.classList.add('visible');
         window.scrollTo({ top: thanks.offsetTop - 60, behavior: 'smooth' });
+        // רענון האלבום אחרי ~3 שניות (זמן לגיליון להתעדכן)
+        setTimeout(loadAlbum, 3000);
       } catch (err) {
         console.error('Submit failed:', err);
         alert('הייתה תקלה בשליחה. אנא נסו שוב בעוד רגע, או צרו קשר ישירות.');
@@ -969,6 +1174,54 @@
         submitBtn.style.cursor = '';
       }
     });
+
+    // ═══════════════════════════════════════════
+    // ALBUM — fetch memories from Sheets
+    // ═══════════════════════════════════════════
+    const grid = document.getElementById('albumGrid');
+
+    function escapeHtml(s) {
+      return String(s || '').replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    function formatDate(iso) {
+      try {
+        const d = new Date(iso);
+        const months = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+        return d.getDate() + ' ב' + months[d.getMonth()];
+      } catch { return ''; }
+    }
+
+    async function loadAlbum() {
+      try {
+        const res = await fetch(ENDPOINT + '?memories=1');
+        const data = await res.json();
+        const memories = (data && data.memories) || [];
+
+        if (!memories.length) {
+          grid.innerHTML = '<div class="album__empty">עוד לא נוספו זיכרונות · היו הראשונים לחלוק</div>';
+          return;
+        }
+
+        grid.innerHTML = memories.map((m, i) => `
+          <article class="mem" style="animation-delay: ${Math.min(i * 70, 600)}ms">
+            <header class="mem__head">
+              <div class="mem__name">${escapeHtml(m.name)}</div>
+              ${m.circle ? `<div class="mem__circle">${escapeHtml(m.circle)}</div>` : ''}
+            </header>
+            <p class="mem__text">${escapeHtml(m.memory)}</p>
+            ${m.date ? `<div class="mem__date">${escapeHtml(formatDate(m.date))}</div>` : ''}
+          </article>
+        `).join('');
+      } catch (err) {
+        console.error('Failed to load memories:', err);
+        grid.innerHTML = '<div class="album__empty">לא הצלחנו לטעון את הזיכרונות כרגע. רעננו את הדף בעוד רגע.</div>';
+      }
+    }
+
+    loadAlbum();
   </script>
 
 </body>
